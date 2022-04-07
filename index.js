@@ -13,7 +13,7 @@ async function getNewCode(){
     const dataWiki = await axios.get("https://genshin-impact.fandom.com/wiki/Promotional_Codes")
     const domWiki = new JSDOM(dataWiki.data)
     let listWiki = domWiki.window.document.querySelectorAll("#mw-content-text > div.mw-parser-output > table > tbody > tr > td:nth-child(1)")
-    let arrayWiki = (Array.apply(null, list)).map(ele => ele.textContent.replaceAll(/ *\[[^\]]*]/,"").replace("\n","").replaceAll(/ *\([^)]*\) */g, ""))
+    let arrayWiki = (Array.apply(null, listWiki)).map(ele => ele.textContent.replaceAll(/ *\[[^\]]*]/,"").replace("\n","").replaceAll(/ *\([^)]*\) */g, ""))
     arrayWiki = array.filter(ele => !ele.spaces())
     return [...array, ...arrayWiki]
 }
