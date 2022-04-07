@@ -15,7 +15,7 @@ async function getNewCode(){
     let listWiki = domWiki.window.document.querySelectorAll("#mw-content-text > div.mw-parser-output > table > tbody > tr > td:nth-child(1)")
     let arrayWiki = (Array.apply(null, listWiki)).map(ele => ele.textContent.replaceAll(/ *\[[^\]]*]/,"").replace("\n","").replaceAll(/ *\([^)]*\) */g, ""))
     arrayWiki = arrayWiki.filter(ele => !ele.spaces())
-    return [...array, ...arrayWiki]
+    return [...array, ...arrayWiki].remdup()
 }
 
 async function main() {
@@ -63,4 +63,10 @@ String.prototype.spaces = function() {
         return true
     }
     return false
+}
+
+Array.prototype.remdup = function () {
+    let s = new Set(this);
+    let it = s.values();
+    return Array.from(it);
 }

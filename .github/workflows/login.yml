@@ -1,6 +1,6 @@
 on:
   schedule:
-    # Runs every hour
+    # Runs every day
     - cron: '0 1 * * *'
   workflow_dispatch:
 
