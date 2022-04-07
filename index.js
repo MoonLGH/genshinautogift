@@ -9,7 +9,13 @@ async function getNewCode(){
     const dom = new JSDOM(data.data)
     let list = dom.window.document.querySelectorAll("div.promocode-row > div:nth-child(5) > span")
     let array = (Array.apply(null, list)).map(ele => ele.textContent)
-    return array
+
+    const dataWiki = await axios.get("https://genshin-impact.fandom.com/wiki/Promotional_Codes")
+    const domWiki = new JSDOM(dataWiki.data)
+    let listWiki = domWiki.window.document.querySelectorAll("#mw-content-text > div.mw-parser-output > table > tbody > tr > td:nth-child(1)")
+    let arrayWiki = (Array.apply(null, list)).map(ele => ele.textContent.replaceAll(/ *\[[^\]]*]/,"").replace("\n","").replaceAll(/ *\([^)]*\) */g, ""))
+    arrayWiki = array.filter(ele => !ele.spaces())
+    return [...array, ...arrayWiki]
 }
 
 async function main() {
@@ -46,3 +52,15 @@ async function login(code){
 }
 
 main()
+
+
+String.prototype.replaceAll = function(search, replacement) {
+    return this.replace(new RegExp(search, 'g'), replacement);
+};
+
+String.prototype.spaces = function() {
+    if(this.indexOf(' ') >= 0){
+        return true
+    }
+    return false
+}
