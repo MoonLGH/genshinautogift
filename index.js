@@ -42,7 +42,8 @@ async function login(code){
         account_id : process.env.account_id,
         uid: process.env.uid,
     }
-    let url = `https://hk4e-api-os.hoyoverse.com/common/apicdkey/api/webExchangeCdkey?uid=${cookie.uid}&region=os_asia&lang=en&cdkey=${code}&game_biz=hk4e_global`
+    
+    let url = `https://sg-hk4e-api.hoyoverse.com/common/apicdkey/api/webExchangeCdkey?uid=${cookie.uid}&region=os_asia&lang=en&cdkey=${code}&game_biz=hk4e_global`
     let data = await axios.get(url, {
         headers : {
             "Cookie" : `cookie_token=${cookie.cookie_token}; account_id=${cookie.account_id}`
