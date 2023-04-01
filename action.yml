@@ -1,0 +1,25 @@
+name: "genshinautogift"
+author: "moonLGH"
+description: "Redeem the newset Genshin Impact Promotional codes!"
+
+runs:
+    using: "composite"
+    steps:
+        - uses: actions/checkout@v3
+        - name: cloning genshinautogift
+          run: git clone https://github.com/MoonLGH/genshinautogift
+          shell: bash
+        - name: Set Node.js 18
+          uses: actions/setup-node@v3
+          with:
+               node-version: 18
+        - name: Install dependencies
+          working-directory: ./genshinautogift
+          run: npm i
+          shell: bash
+        - name: Run the script
+          working-directory: ./genshinautogift
+          run: node index.js
+          shell: bash
+          env: 
+              login_data: ${{ vars.login_data }}
