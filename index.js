@@ -38,7 +38,7 @@ async function main() {
 
 async function login(code){
     let cookie = process.env.login_data
-    if(cookie === "") throw new Error(`Login Credentials is Empty!`)
+    if(cookie === ("" || undefined || null )) throw new Error(`Login Credentials is Empty!`)
     try{
         JSON.parse(cookie)
     }catch(err){
