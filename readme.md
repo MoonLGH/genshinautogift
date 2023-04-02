@@ -40,4 +40,5 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: genshinautogift check
-        uses: MoonLGH@/genshinautogift@main```
+        uses: MoonLGH@/genshinautogift@main
+ ```
